@@ -1,0 +1,21 @@
+
+CREATE TABLE rocketLaunch (
+    flightNumber INTEGER NOT NULL PRIMARY KEY,
+    missionName TEXT NOT NULL,
+    details TEXT,
+    launchSuccess INTEGER AS kotlin.Boolean,
+    launchDateUTC TEXT NOT NULL,
+    patchUrlSmall TEXT,
+    patchUrlLarge TEXT,
+    articleUrl TEXT
+);
+
+insertLaunch:
+INSERT OR REPLACE INTO rocketLaunch(flightNumber, missionName, details, launchSuccess, launchDateUTC, patchUrlSmall, patchUrlLarge, articleUrl)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?);
+
+selectAllLaunchesInfo:
+SELECT * FROM rocketLaunch;
+
+removeAllLaunches:
+DELETE FROM rocketLaunch;
