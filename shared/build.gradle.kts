@@ -53,6 +53,8 @@ kotlin {
         }
     }
 
+    jvm()
+
     // Source set declarations.
     // Declaring a target automatically creates a source set with the same name. By default, the
     // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
@@ -62,13 +64,20 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
+                // Koin
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose.viewmodel)
                 // Add KMP dependencies here
             }
         }
 
+
+
         commonTest {
             dependencies {
                 implementation(libs.kotlin.test)
+                implementation(libs.koin.test)
             }
         }
 
