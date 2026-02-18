@@ -6,11 +6,11 @@ import compose.project.demo.composedemo.data.local.ILocalRocketLaunchesDataSourc
 import compose.project.demo.composedemo.data.local.LocalRocketLaunchesDataSource
 import compose.project.demo.composedemo.data.remote.IRemoteRocketLaunchesDataSource
 import compose.project.demo.composedemo.data.remote.RemoteRocketLaunchesDataSource
-import io.ktor.websocket.FrameType.Companion.get
+import compose.project.demo.composedemo.data.repository.IRocketLaunchesRepository
+import compose.project.demo.composedemo.data.repository.RocketLaunchesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import org.koin.dsl.module
-import kotlin.coroutines.EmptyCoroutineContext.get
 
 val dataModule = module {
     single<IRemoteRocketLaunchesDataSource> {
@@ -19,6 +19,7 @@ val dataModule = module {
             Dispatchers.IO
         )
     }
+    single<IRocketLaunchesRepository> { RocketLaunchesRepository(get(), get(), Dispatchers.Default) }
 
     single { get<DriverFactory>().createDriver() }
     single { AppDatabase(get()) }
